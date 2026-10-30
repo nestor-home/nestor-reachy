@@ -2,9 +2,10 @@
 
 Without a robot (no twin running), it is still a voice satellite: it then declares only audio.
 
-Reachy has no screen and no speech synthesis of its own: it is paired with an enrollment code (a
-pairing URI given in its configuration, `NESTOR_PAIRING_URI` by default), or by typing in Nestor the
-device code it logs. With a body, it wiggles its antennas when asked to identify itself.
+Reachy has a speaker and no screen: it is paired with an enrollment code (a pairing URI given in its
+configuration, `NESTOR_PAIRING_URI` by default), or by typing in Nestor the device code it says on its
+speaker with the SDK's recorded voice (`device_code.speech`) and logs. With a body, it wiggles its
+antennas when asked to identify itself.
 """
 
 from collections.abc import Mapping

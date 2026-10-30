@@ -60,4 +60,4 @@ async def test_without_a_robot_it_is_still_a_conforming_voice_satellite() -> Non
     assert driver.reachy is not None
     manifest = driver.reachy.satellite.manifest
     assert AUDIO_CAPTURE in manifest.names and not {EXPRESSION, HEAD_MOTION, IDENTIFY} & manifest.names
-    assert manifest.pairing_methods == (PairingMethod.PROVISIONING,), "no screen, no voice of its own"
+    assert manifest.pairing_methods == (PairingMethod.SPEECH, PairingMethod.PROVISIONING), "it says its code"

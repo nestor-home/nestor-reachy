@@ -4,9 +4,9 @@
     nestor-reachy run --room salon --pairing-uri "nestor+http://nestor.local:7860/?code=K7QF2M9X"
     nestor-reachy run --core http://nestor.local:7860 --room salon   # once paired, or to pair by its device code
 
-Reachy has no screen and no voice of its own to present a pairing code: give it the pairing URI of
-an enrollment code made in Nestor (flag, or `NESTOR_PAIRING_URI`), or type in Nestor the code it
-logs. On the twin, the voice goes through this machine's microphone and speaker (`audio` extra).
+Reachy has no screen: give it the pairing URI of an enrollment code made in Nestor (flag, or
+`NESTOR_PAIRING_URI`), or type in Nestor the code it says on its speaker (and logs). On the twin,
+the voice goes through this machine's microphone and speaker (`audio` extra).
 """
 
 import argparse

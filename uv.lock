@@ -1,5 +1,5 @@
 version = 1
-revision = 5
+revision = 2
 requires-python = ">=3.12"
 resolution-markers = [
     "python_full_version >= '3.14' and extra != 'extra-13-nestor-reachy-reachy' and extra == 'group-13-nestor-reachy-dev'",
@@ -2451,8 +2451,9 @@ requires-dist = [
     { name = "fluent-runtime", specifier = ">=0.4.0" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "sounddevice", marker = "extra == 'sounddevice'", specifier = ">=0.5.2" },
+    { name = "zxing-cpp", marker = "extra == 'qr'", specifier = ">=3.1.1" },
 ]
-provides-extras = ["sounddevice"]
+provides-extras = ["sounddevice", "qr"]
 
 [package.metadata.requires-dev]
 dev = [
@@ -2463,6 +2464,7 @@ dev = [
     { name = "pytest-asyncio", specifier = "==1.4.1" },
     { name = "pytest-cov", specifier = "==7.1.0" },
     { name = "ruff", specifier = "==0.17.3" },
+    { name = "segno", specifier = "==1.6.6" },
     { name = "ty", specifier = "==0.0.94" },
 ]
 
