@@ -1,0 +1,121 @@
+[build-system]
+requires = ["uv_build>=0.13.6,<0.14"]
+build-backend = "uv_build"
+
+[project]
+name = "nestor-reachy"
+version = "0.0.1"
+description = "Reachy Mini as a Nestor satellite: the assistant's voice, attitude and expressions on a robot head."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Mathis Lambert" }]
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.28.1",
+    "nestor-satellite",
+]
+keywords = ["nestor", "satellite", "reachy mini", "robotics"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+
+[project.optional-dependencies]
+# The Reachy Mini SDK and its MuJoCo simulation (the twin). Version pinned: the driver relies on its API.
+reachy = ["reachy-mini[mujoco]==1.13.0"]
+# This machine's microphone and speaker (the twin has no audio of its own).
+audio = ["nestor-satellite[sounddevice]"]
+
+[project.scripts]
+nestor-reachy = "nestor_reachy.cli:main"
+
+[project.urls]
+Homepage = "https://nestor.mathislambert.fr"
+Source = "https://github.com/nestor-home/nestor-reachy"
+Issues = "https://github.com/nestor-home/nestor-reachy/issues"
+
+[dependency-groups]
+dev = [
+    "pytest==9.1.1",
+    "pytest-asyncio==1.4.1",
+    "pytest-cov==7.1.0",
+    "ruff==0.17.3",
+    "ty==0.0.94",
+    "pre-commit==4.7.0",
+    # The server's black-box conformance suite. Tests only: the driver never imports it.
+    "nestor-home[voice]",
+]
+# Against the MuJoCo twin: `uv run --no-dev --group live --extra reachy pytest -m live`.
+live = [
+    "pytest==9.1.1",
+    "pytest-asyncio==1.4.1",
+    "pytest-cov==7.1.0",
+]
+
+[tool.uv]
+# reachy-mini pins websockets < 16, the server needs >= 17: they never share an environment.
+conflicts = [[{ extra = "reachy" }, { group = "dev" }]]
+# The latest GStreamer plugin wheels (pulled by reachy-mini) skip CPython 3.12; 1.28.7 has them (as in the POC).
+constraint-dependencies = [
+    "gstreamer-plugins==1.28.7",
+    "gstreamer-plugins-gpl==1.28.7",
+    "gstreamer-plugins-gpl-restricted==1.28.7",
+    "gstreamer-plugins-libs==1.28.7",
+    "gstreamer-plugins-restricted==1.28.7",
+]
+
+# reachy-mini needs PyGObject on Linux, published as sources only: their metadata is declared here so
+# that locking does not have to build them (the driver never uses them; the Reachy SDK does, on Linux).
+[[tool.uv.dependency-metadata]]
+name = "pygobject"
+version = "3.46.0"
+requires-dist = ["pycairo>=1.16"]
+
+[[tool.uv.dependency-metadata]]
+name = "pycairo"
+version = "1.29.2"
+requires-dist = []
+
+[tool.uv.sources]
+nestor-satellite = { path = "../nestor-satellite-python", editable = true }
+nestor-home = { path = "../nestor", editable = true }
+
+[tool.uv.build-backend]
+module-name = "nestor_reachy"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = ["--import-mode=importlib", "--cov=nestor_reachy", "--cov-report=term-missing:skip-covered", "-m", "not live"]
+markers = ["live: drives the MuJoCo twin (daemon running); run with `pytest -m live`"]
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+fail_under = 95
+exclude_also = ["raise NotImplementedError", "\\.\\.\\.$"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.ty.environment]
+python-version = "3.12"
+
+[tool.ty.rules]
+possibly-unresolved-reference = "error"
+
+[tool.ty.analysis]
+# The Reachy Mini SDK is an optional extra that cannot share the dev environment (see [tool.uv]).
+allowed-unresolved-imports = ["reachy_mini", "reachy_mini.**"]
