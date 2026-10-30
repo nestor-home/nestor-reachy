@@ -2,7 +2,8 @@
 
 Safety never depends on the network: the animation loop runs locally and rests the robot when the
 link to the core is down, or when nothing has been heard from it (intent or audio) for
-`watchdog_s` — a frozen core cannot leave the head mid-gesture.
+`watchdog_s`: a frozen core cannot leave the head mid-gesture. Asked to identify itself, it wiggles
+its antennas for a moment, even at rest (while it waits to be paired, the link is not up yet).
 """
 
 import asyncio
@@ -13,7 +14,7 @@ from collections.abc import Callable
 
 from nestor_satellite import Behavior, Body, Expression
 
-from nestor_reachy.pose import RATE_HZ, REST, Pose, pose
+from nestor_reachy.pose import RATE_HZ, REST, Pose, identify, pose
 from nestor_reachy.robot import Robot
 
 logger = logging.getLogger(__name__)
@@ -29,6 +30,7 @@ class Animator(Body):
         self._expression_at = 0.0
         self._beat_at: float | None = None
         self._heard_at: float | None = None
+        self._identify_at: float | None = None
         self._linked = False
         self._loop: asyncio.Task[None] | None = None
         self.lost = False
@@ -43,6 +45,9 @@ class Animator(Body):
 
     def beat(self) -> None:
         self._beat_at = self._clock()
+
+    def identify(self) -> None:
+        self._identify_at = self._clock()
 
     def heartbeat(self) -> None:
         self._heard_at = self._clock()
@@ -61,17 +66,19 @@ class Animator(Body):
         return not self._linked or silent
 
     def target(self) -> Pose:
+        now = self._clock()
         if self.resting:
             self._behavior, self._expression, self._beat_at = Behavior.IDLE, None, None
-            return REST
-        now = self._clock()
-        return pose(
-            self._behavior,
-            now,
-            expression=self._expression,
-            expression_age=now - self._expression_at,
-            beat_age=None if self._beat_at is None else now - self._beat_at,
-        )
+            current = REST
+        else:
+            current = pose(
+                self._behavior,
+                now,
+                expression=self._expression,
+                expression_age=now - self._expression_at,
+                beat_age=None if self._beat_at is None else now - self._beat_at,
+            )
+        return current if self._identify_at is None else identify(current, now - self._identify_at)
 
     async def start(self) -> None:
         self._loop = asyncio.create_task(self._animate(), name="reachy animation")

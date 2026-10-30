@@ -2,7 +2,8 @@
 
 Each attitude has its own motion (breathing at rest, leaning in to listen, a wandering gaze while
 thinking, a sway while speaking); a speech beat is a short nod; an expression rises then fades back
-over `EXPRESSION_S`. Every pose is clamped to `LIMITS`.
+over `EXPRESSION_S`; identifying itself, it wiggles its antennas for `IDENTIFY_S`. Every pose is
+clamped to `LIMITS`.
 """
 
 import math
@@ -13,6 +14,7 @@ from nestor_satellite import Behavior, Expression
 RATE_HZ = 30
 EXPRESSION_S = 1.6  # how long an expression lasts before the attitude takes over again
 BEAT_S = 0.25  # how long a speech accent lasts
+IDENTIFY_S = 2.0  # how long it wiggles its antennas when asked to make itself noticed
 REST_ANTENNAS = (-0.17, 0.17)  # rad, [right, left]
 
 
@@ -80,6 +82,16 @@ def pose(
         weight = math.sin(math.pi * expression_age / EXPRESSION_S)  # rises, then fades back
         current = _blend(current, _expression(expression, expression_age), weight)
     return current.clamped()
+
+
+def identify(current: Pose, age: float) -> Pose:
+    """The antennas wiggling fast and wide over `current` for `IDENTIFY_S`, then `current` again. Only
+    the antennas move: it is safe even while the head rests, and readable from across the room."""
+    if not 0 <= age < IDENTIFY_S:
+        return current
+    swing = 0.6 * math.sin(2 * math.pi * 3 * age)
+    antennas = (current.antennas[0] - swing, current.antennas[1] + swing)
+    return Pose(current.roll, current.pitch, current.yaw, current.z, antennas).clamped()
 
 
 def _expression(expression: Expression, age: float) -> Pose:

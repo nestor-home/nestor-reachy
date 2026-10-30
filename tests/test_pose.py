@@ -1,7 +1,7 @@
 from nestor_satellite import Behavior, Expression
 
-from nestor_reachy import LIMITS, Limits, Pose, pose
-from nestor_reachy.pose import BEAT_S, EXPRESSION_S
+from nestor_reachy import LIMITS, REST, Limits, Pose, pose
+from nestor_reachy.pose import BEAT_S, EXPRESSION_S, IDENTIFY_S, identify
 
 
 def spread(p: Pose) -> float:
@@ -49,3 +49,17 @@ def test_no_combination_leaves_the_motion_limits() -> None:
 def test_clamping_holds_any_pose_within_limits_and_drops_nonsense() -> None:
     wild = Pose(roll=90, pitch=-90, yaw=float("nan"), z=50, antennas=(-3.0, float("inf")))
     assert wild.clamped(Limits(angle_deg=10, z_mm=5, antenna_rad=0.5)) == Pose(10, -10, 0.0, 5, (-0.5, 0.0))
+
+
+def test_identifying_wiggles_only_the_antennas_widely_then_stops() -> None:
+    base = pose(Behavior.LISTENING, 1.0)
+    wiggle = [identify(base, i * IDENTIFY_S / 40) for i in range(40)]
+    assert all((p.roll, p.pitch, p.yaw, p.z) == (base.roll, base.pitch, base.yaw, base.z) for p in wiggle), "head still"
+    assert max(spread(p) for p in wiggle) - min(spread(p) for p in wiggle) > 1.5, "visible from across the room"
+    assert identify(base, IDENTIFY_S) == base and identify(base, -0.1) == base
+
+
+def test_identifying_never_leaves_the_motion_limits() -> None:
+    for start in (REST, *(pose(b, 0.3, expression=e, expression_age=0.5) for b in Behavior for e in Expression)):
+        for i in range(60):
+            assert all(abs(a) <= LIMITS.antenna_rad for a in identify(start, i * 0.033).antennas)

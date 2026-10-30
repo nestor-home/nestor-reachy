@@ -1,9 +1,13 @@
 """Reachy Mini as a satellite: the SDK's connection, with the animator as its body.
 
 Without a robot (no twin running), it is still a voice satellite: it then declares only audio.
+
+Reachy has no screen and no speech synthesis of its own: it is paired with an enrollment code (a
+pairing URI given in its configuration, `NESTOR_PAIRING_URI` by default), or by typing in Nestor the
+device code it logs. With a body, it wiggles its antennas when asked to identify itself.
 """
 
-from collections.abc import Callable
+from collections.abc import Mapping
 from pathlib import Path
 
 from nestor_satellite import (
@@ -11,6 +15,7 @@ from nestor_satellite import (
     AUDIO_PLAYBACK,
     EXPRESSION,
     HEAD_MOTION,
+    IDENTIFY,
     AudioSink,
     AudioSource,
     Device,
@@ -18,17 +23,17 @@ from nestor_satellite import (
     Satellite,
     TokenStore,
 )
-from nestor_satellite.pairing import show_code
 
 from nestor_reachy.animator import Animator
 from nestor_reachy.robot import Robot
 
 MODEL = "reachy-mini"
+BRAND = "pollen-robotics"
 
 
 def manifest(room: str, *, device_id: str | None = None, body: bool = True) -> Manifest:
-    device = Device(device_id or f"reachy-{room}", MODEL, room)
-    motion = (EXPRESSION, HEAD_MOTION) if body else ()
+    device = Device(device_id or f"reachy-{room}", MODEL, room, BRAND)
+    motion = (EXPRESSION, HEAD_MOTION, IDENTIFY) if body else ()
     return Manifest.of(device, AUDIO_CAPTURE, AUDIO_PLAYBACK, *motion)
 
 
@@ -38,7 +43,7 @@ class ReachySatellite:
 
     def __init__(
         self,
-        core: str,
+        core: str | None,
         room: str,
         *,
         robot: Robot | None,
@@ -46,9 +51,13 @@ class ReachySatellite:
         source: AudioSource | None = None,
         sink: AudioSink | None = None,
         device_id: str | None = None,
-        on_code: Callable[[str], None] = show_code,
+        enrollment: str | None = None,
+        locale: str | None = None,
+        environ: Mapping[str, str] | None = None,
         poll_s: float = 1.0,
     ) -> None:
+        """`core` may be `None` when a pairing URI says where it is; `enrollment` is a pairing URI or an
+        enrollment code (by default `NESTOR_PAIRING_URI`, else `NESTOR_PAIRING_CODE`, from `environ`)."""
         self.animator = Animator(robot) if robot is not None else None
         self.satellite = Satellite(
             core,
@@ -57,7 +66,9 @@ class ReachySatellite:
             body=self.animator,
             source=source,
             sink=sink,
-            on_code=on_code,
+            enrollment=enrollment,
+            locale=locale,
+            environ=environ,
             poll_s=poll_s,
         )
 

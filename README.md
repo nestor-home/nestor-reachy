@@ -2,7 +2,7 @@
 
 [Reachy Mini](https://www.pollen-robotics.com/reachy-mini/) as a satellite of
 [Nestor](https://github.com/nestor-home/nestor): the assistant speaks and listens through it, and
-its head and antennas follow the conversation — listening, thinking, speaking, nodding on each word,
+its head and antennas follow the conversation: listening, thinking, speaking, nodding on each word,
 laughing when the voice laughs. Built on [nestor-satellite](https://github.com/nestor-home/nestor-satellite-python).
 
 > **Status:** the MuJoCo twin only. A physical robot is refused until its safety policy is
@@ -11,8 +11,25 @@ laughing when the voice laughs. Built on [nestor-satellite](https://github.com/n
 ```bash
 pip install "nestor-reachy[reachy,audio]"
 nestor-reachy twin --headless &                               # the simulated robot
-nestor-reachy run --core http://nestor.local:7860 --room salon # shows a pairing code the first time
+nestor-reachy run --room salon --pairing-uri "nestor+http://nestor.local:7860/?code=K7QF2M9X"
 ```
+
+## Pairing
+
+Reachy has no screen and no speech synthesis of its own, so it is paired with an **enrollment code**:
+add a satellite in the Nestor admin with the provisioning method (`enrollment.provisioning`), and
+give the robot the pairing URI it returns, by flag or in its environment:
+
+```bash
+NESTOR_PAIRING_URI="nestor+http://nestor.local:7860/?code=K7QF2M9X" nestor-reachy run --room salon
+nestor-reachy run --core http://nestor.local:7860 --room salon --pairing-code K7QF-2M9X
+```
+
+Without one, it logs a six-digit device code to type in the admin. The token is then kept in
+`~/.config/nestor-reachy/reachy-<room>.json` and later runs reconnect with it
+(`nestor-reachy run --core http://nestor.local:7860 --room salon`). To tell robots apart, the admin
+can ask one to identify itself: it wiggles its antennas for two seconds, while it waits to be paired
+or once connected.
 
 Safety lives on the device: every target is clamped to the motion limits, and the robot returns to
 rest when the link to the core drops or nothing is heard from it for two seconds.

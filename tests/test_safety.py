@@ -5,6 +5,7 @@ import asyncio
 from nestor_satellite import Behavior, Expression
 
 from nestor_reachy import REST, Animator, Limits, Pose, SafeRobot
+from nestor_reachy.pose import IDENTIFY_S
 
 from .doubles import Clock, RecordingRobot
 
@@ -102,3 +103,18 @@ async def test_an_animator_closed_before_starting_still_rests_the_robot() -> Non
     robot = RecordingRobot()
     await Animator(robot).close()
     assert robot.targets == [REST] and robot.closed
+
+
+def test_asked_to_identify_while_waiting_to_pair_it_wiggles_its_antennas_head_at_rest() -> None:
+    clock = Clock()
+    animator = Animator(RecordingRobot(), clock=clock)
+    animator.identify()
+    poses = []
+    for _ in range(20):
+        clock.now += IDENTIFY_S / 20 * 0.9
+        poses.append(animator.target())
+    assert animator.resting, "no link yet: the watchdog keeps the head at rest"
+    assert all((p.roll, p.pitch, p.yaw, p.z) == (0, 0, 0, 0) for p in poses)
+    assert max(abs(p.antennas[1] - REST.antennas[1]) for p in poses) > 0.4
+    clock.now += IDENTIFY_S
+    assert animator.target() == REST, "then still again"

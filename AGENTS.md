@@ -21,11 +21,11 @@ under 95 %. The `reachy` extra (the Reachy Mini SDK) and the `dev` group cannot 
 
 ```text
 src/nestor_reachy/
-├── pose.py       pure body language: pose(behavior, t, expression, beat) → Pose, motion limits
-├── animator.py   the satellite's Body: latest intents, 30 Hz loop, watchdog → rest
+├── pose.py       pure body language: pose(behavior, t, expression, beat) → Pose, identify wiggle, motion limits
+├── animator.py   the satellite's Body: latest intents, identify, 30 Hz loop, watchdog → rest
 ├── robot.py      Robot port, SafeRobot (clamps every target), the Reachy Mini adapter, connect_twin
-├── driver.py     ReachySatellite: manifest + SDK Satellite + animator
-└── cli.py        nestor-reachy run | twin
+├── driver.py     ReachySatellite: manifest (nestor.satellite/2) + SDK Satellite + animator
+└── cli.py        nestor-reachy run (--pairing-uri / --pairing-code) | twin
 tests/            pose and safety units, conformance with the robot mocked, live/ against the twin
 ```
 
@@ -38,6 +38,9 @@ tests/            pose and safety units, conformance with the robot mocked, live
    policy (limits, emergency stop, supervision) is validated on hardware. Do not relax this.
 4. **Losing the robot never stops the satellite**: it keeps speaking and listening without a body.
 5. An intent never becomes a movement of a different kind (joy is never a displacement).
+6. **Identify moves the antennas only**, for `IDENTIFY_S`, clamped like any target: it is the one
+   gesture allowed while the watchdog holds the head at rest (a device waiting to be paired has no
+   link yet).
 
 ## Code conventions
 

@@ -1,9 +1,12 @@
 """`nestor-reachy`: Reachy Mini as a satellite of a Nestor core.
 
     nestor-reachy twin --headless            # the simulated robot (MuJoCo), needs the `reachy` extra
-    nestor-reachy run --core http://nestor.local:7860 --room salon
+    nestor-reachy run --room salon --pairing-uri "nestor+http://nestor.local:7860/?code=K7QF2M9X"
+    nestor-reachy run --core http://nestor.local:7860 --room salon   # once paired, or to pair by its device code
 
-On the twin, the voice goes through this machine's microphone and speaker (`audio` extra).
+Reachy has no screen and no voice of its own to present a pairing code: give it the pairing URI of
+an enrollment code made in Nestor (flag, or `NESTOR_PAIRING_URI`), or type in Nestor the code it
+logs. On the twin, the voice goes through this machine's microphone and speaker (`audio` extra).
 """
 
 import argparse
@@ -15,6 +18,8 @@ import shutil
 import sys
 from collections.abc import Sequence
 
+from nestor_satellite import InvalidEnrollment, PairingFailed
+
 from nestor_reachy.driver import ReachySatellite
 from nestor_reachy.robot import DAEMON, connect_twin
 
@@ -23,7 +28,13 @@ def parse(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(prog="nestor-reachy", description=__doc__.splitlines()[0])
     commands = parser.add_subparsers(dest="command", required=True)
     run = commands.add_parser("run", help="connect the robot to a Nestor core")
-    run.add_argument("--core", required=True, help="the core's voice server, e.g. http://nestor.local:7860")
+    run.add_argument(
+        "--core", help="the core's voice server, e.g. http://nestor.local:7860 (default: the pairing URI's)"
+    )
+    enrollment = run.add_mutually_exclusive_group()
+    enrollment.add_argument("--pairing-uri", help="pair with this enrollment code's URI (default: $NESTOR_PAIRING_URI)")
+    enrollment.add_argument("--pairing-code", help="pair with this enrollment code (default: $NESTOR_PAIRING_CODE)")
+    run.add_argument("--lang", help="the language of what it says, en or fr (default: the environment's)")
     run.add_argument("--room", required=True, help="the room the robot is in (a slug: salon, cuisine…)")
     run.add_argument("--id", help="this robot's id (default: reachy-<room>)")
     run.add_argument("--daemon", default=DAEMON, help="the Reachy Mini daemon (simulated only, for now)")
@@ -47,6 +58,8 @@ async def serve(args: argparse.Namespace) -> None:
         source=Microphone(),
         sink=Speaker(),
         device_id=device_id,
+        enrollment=args.pairing_uri or args.pairing_code,
+        locale=args.lang,
     )
     await satellite.run()
 
@@ -70,6 +83,11 @@ def main(argv: Sequence[str] | None = None) -> None:
     if args.command == "twin":
         twin(args.headless)
         return
-    logging.basicConfig(level=logging.INFO if args.verbose else logging.WARNING)
+    logging.basicConfig(level=logging.INFO if args.verbose else logging.WARNING, format="%(levelname)s %(message)s")
     with contextlib.suppress(KeyboardInterrupt):
-        asyncio.run(serve(args))
+        try:
+            asyncio.run(serve(args))
+        except (InvalidEnrollment, ValueError) as error:
+            sys.exit(f"nestor-reachy: {error}")
+        except PairingFailed:
+            sys.exit(1)  # already said why, in the log
