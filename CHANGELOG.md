@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3.0](https://github.com/nestor-home/nestor-reachy/compare/v0.2.0...v0.3.0) (2026-11-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* the default core URL uses port 8471.
+
+### Bug Fixes
+
+* use the core's port 8471 ([#10](https://github.com/nestor-home/nestor-reachy/issues/10)) ([188aaf1](https://github.com/nestor-home/nestor-reachy/commit/188aaf1a126517d3ebf28732e473072f64a1deb3))
+
 ## [0.2.0](https://github.com/nestor-home/nestor-reachy/compare/v0.1.0...v0.2.0) (2026-11-01)
 
 
