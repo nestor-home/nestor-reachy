@@ -11,22 +11,8 @@ jobs:
     strategy:
       matrix:
         python: ["3.12", "3.13", "3.14"]
-    defaults:
-      run:
-        working-directory: nestor-reachy
     steps:
       - uses: actions/checkout@v7
-        with:
-          path: nestor-reachy
-      # Sibling checkouts: the SDK (path dependency) and the server (dev-only, conformance suite).
-      - uses: actions/checkout@v7
-        with:
-          repository: nestor-home/nestor-satellite-python
-          path: nestor-satellite-python
-      - uses: actions/checkout@v7
-        with:
-          repository: nestor-home/nestor
-          path: nestor
       - uses: astral-sh/setup-uv@v7
         with:
           python-version: ${{ matrix.python }}
