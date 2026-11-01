@@ -2319,7 +2319,7 @@ wheels = [
 
 [[package]]
 name = "nestor-home"
-version = "0.0.2"
+version = "0.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aioimaplib" },
@@ -2335,9 +2335,9 @@ dependencies = [
     { name = "uvicorn" },
     { name = "websockets", version = "17.3", source = { registry = "https://pypi.org/simple" } },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f4/2e/8e6359e5eda3437b9642dc1b43e592bffbbf30e3520622ecffa0f72a91b4/nestor_home-0.0.2.tar.gz", hash = "sha256:a48a91ce3b4fe2ddcef92756268720d121154797e25cc5badccd0f8ad3683ce6", size = 1244366, upload-time = "2026-11-01T14:38:19.84Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/7b/da/a33d0c3b99bea65fe273be85fd3bd966d6d1fbe3b7ca8123d3135bb4f8bd/nestor_home-0.2.0.tar.gz", hash = "sha256:3bb307f2f15d21fc1ee9c8223cbb5e183f327b9399f7ea729e603061dba3a6f4", size = 1249188, upload-time = "2026-11-01T17:13:21.066Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/07/1e/f7ab3fd9208c8fe3082a3531dffde9f1b7461e4d22e0222625388048bdc7/nestor_home-0.0.2-py3-none-any.whl", hash = "sha256:308c9828e0bd6931d6b9ae98d02a9e05a2e4a4934dcb7a4cac5aa735be70d772", size = 1410900, upload-time = "2026-11-01T14:38:18.198Z" },
+    { url = "https://files.pythonhosted.org/packages/39/79/a9d03b93fc577014e7efd55e42e899256bd9b54e60a79d9c9e579fcaae72/nestor_home-0.2.0-py3-none-any.whl", hash = "sha256:b91636343fd8cd5c83b890dde57582fc28145af1b74ac3f83731f14d32849345", size = 1416306, upload-time = "2026-11-01T17:13:19.581Z" },
 ]
 
 [package.optional-dependencies]
@@ -2381,7 +2381,7 @@ live = [
 [package.metadata]
 requires-dist = [
     { name = "httpx", specifier = ">=0.28.1" },
-    { name = "nestor-satellite", specifier = ">=0.1,<0.2" },
+    { name = "nestor-satellite", specifier = ">=0.2,<0.3" },
     { name = "nestor-satellite", extras = ["sounddevice"], marker = "extra == 'audio'" },
     { name = "reachy-mini", extras = ["mujoco"], marker = "extra == 'reachy'", specifier = "==1.13.0" },
 ]
@@ -2389,7 +2389,7 @@ provides-extras = ["reachy", "audio"]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "nestor-home", extras = ["voice"], specifier = "==0.0.2" },
+    { name = "nestor-home", extras = ["voice"], specifier = "==0.2.0" },
     { name = "pre-commit", specifier = "==4.7.0" },
     { name = "pytest", specifier = "==9.1.1" },
     { name = "pytest-asyncio", specifier = "==1.4.1" },
@@ -2405,16 +2405,16 @@ live = [
 
 [[package]]
 name = "nestor-satellite"
-version = "0.1.0"
+version = "0.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiortc" },
     { name = "fluent-runtime" },
     { name = "httpx" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/de/59/dcbc6cac4125266f55bb4dafe9656767ab73beaed512f850da4db5e7bfbe/nestor_satellite-0.1.0.tar.gz", hash = "sha256:5da8573afc89c3b7aa6d45ffae02e193820f29d31da7412105da0f1fcd72e4c0", size = 450589, upload-time = "2026-11-01T14:43:17.51Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/77/91/0bca7f74e94bfa5e24836ed116377ffa7361d579e1f922fc9456be8716bc/nestor_satellite-0.2.0.tar.gz", hash = "sha256:b672ea6b385ca6fda08de4d6756bd71d61808ee8594d948b8af33ffce297bd56", size = 448442, upload-time = "2026-11-01T17:21:28.564Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/1f/af/4ad1c1056444fbcd7b83d3d179a0e2d45358dcc4fd8ec1e554b4f1ddcc8f/nestor_satellite-0.1.0-py3-none-any.whl", hash = "sha256:d8851180cd752170be46cce0409331f0dad9d6cbf858b0a02045e1670cf6e7f8", size = 464615, upload-time = "2026-11-01T14:43:16.212Z" },
+    { url = "https://files.pythonhosted.org/packages/dc/da/c23da61db8630dfb795569f7c574c686deab3223e527d91c24bb192bfc08/nestor_satellite-0.2.0-py3-none-any.whl", hash = "sha256:50c8f4452d316240b81fb70b548da882b1f6159cc9fc573d988c181ba421fa31", size = 462999, upload-time = "2026-11-01T17:21:26.314Z" },
 ]
 
 [package.optional-dependencies]
