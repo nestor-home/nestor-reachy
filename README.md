@@ -11,7 +11,7 @@ laughing when the voice laughs. Built on [nestor-satellite](https://github.com/n
 ```bash
 pip install "nestor-reachy[reachy,audio]"
 nestor-reachy twin --headless &                               # the simulated robot
-nestor-reachy run --room salon --pairing-uri "nestor+http://nestor.local:7860/?code=K7QF2M9X"
+nestor-reachy run --room salon --pairing-uri "nestor+http://nestor.local:8471/?code=K7QF2M9X"
 ```
 
 ## Pairing
@@ -21,14 +21,14 @@ Nestor admin with the provisioning method (`enrollment.provisioning`), and give 
 pairing URI it returns, by flag or in its environment:
 
 ```bash
-NESTOR_PAIRING_URI="nestor+http://nestor.local:7860/?code=K7QF2M9X" nestor-reachy run --room salon
-nestor-reachy run --core http://nestor.local:7860 --room salon --pairing-code K7QF-2M9X
+NESTOR_PAIRING_URI="nestor+http://nestor.local:8471/?code=K7QF2M9X" nestor-reachy run --room salon
+nestor-reachy run --core http://nestor.local:8471 --room salon --pairing-code K7QF-2M9X
 ```
 
 Without one, it says a six-digit device code on its speaker, twice, digit by digit, with the SDK's
 recorded voice (`device_code.speech`, offline), and logs it: type it in the admin. The token is then kept in
 `~/.config/nestor-reachy/reachy-<room>.json` and later runs reconnect with it
-(`nestor-reachy run --core http://nestor.local:7860 --room salon`). To tell robots apart, the admin
+(`nestor-reachy run --core http://nestor.local:8471 --room salon`). To tell robots apart, the admin
 can ask one to identify itself: it wiggles its antennas for two seconds, while it waits to be paired
 or once connected.
 

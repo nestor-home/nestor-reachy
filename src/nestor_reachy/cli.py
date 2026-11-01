@@ -1,8 +1,8 @@
 """`nestor-reachy`: Reachy Mini as a satellite of a Nestor core.
 
     nestor-reachy twin --headless            # the simulated robot (MuJoCo), needs the `reachy` extra
-    nestor-reachy run --room salon --pairing-uri "nestor+http://nestor.local:7860/?code=K7QF2M9X"
-    nestor-reachy run --core http://nestor.local:7860 --room salon   # once paired, or to pair by its device code
+    nestor-reachy run --room salon --pairing-uri "nestor+http://nestor.local:8471/?code=K7QF2M9X"
+    nestor-reachy run --core http://nestor.local:8471 --room salon   # once paired, or to pair by its device code
 
 Reachy has no screen: give it the pairing URI of an enrollment code made in Nestor (flag, or
 `NESTOR_PAIRING_URI`), or type in Nestor the code it says on its speaker (and logs). On the twin,
@@ -29,7 +29,7 @@ def parse(argv: Sequence[str] | None = None) -> argparse.Namespace:
     commands = parser.add_subparsers(dest="command", required=True)
     run = commands.add_parser("run", help="connect the robot to a Nestor core")
     run.add_argument(
-        "--core", help="the core's voice server, e.g. http://nestor.local:7860 (default: the pairing URI's)"
+        "--core", help="the core's voice server, e.g. http://nestor.local:8471 (default: the pairing URI's)"
     )
     enrollment = run.add_mutually_exclusive_group()
     enrollment.add_argument("--pairing-uri", help="pair with this enrollment code's URI (default: $NESTOR_PAIRING_URI)")

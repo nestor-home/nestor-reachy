@@ -30,7 +30,7 @@ async def test_run_connects_the_twin_and_runs_the_satellite_in_its_room(monkeypa
     monkeypatch.setitem(sys.modules, "sounddevice", SimpleNamespace())
     monkeypatch.setattr(cli, "connect_twin", twin)
     monkeypatch.setattr(ReachySatellite, "run", run)
-    await cli.serve(cli.parse(["run", "--core", "http://nestor.local:7860", "--room", "bureau"]))
+    await cli.serve(cli.parse(["run", "--core", "http://nestor.local:8471", "--room", "bureau"]))
 
     [satellite] = ran
     device = satellite.satellite.manifest.device
@@ -74,7 +74,7 @@ def test_a_robot_that_cannot_be_configured_or_paired_exits_with_an_error(monkeyp
 
     monkeypatch.setattr(ReachySatellite, "run", refused)
     with pytest.raises(SystemExit) as exited:
-        cli.main(["run", "--core", "http://h:7860", "--room", "salon"])
+        cli.main(["run", "--core", "http://h:8471", "--room", "salon"])
     assert exited.value.code == 1
 
 
@@ -83,7 +83,7 @@ def test_main_runs_until_interrupted(monkeypatch: pytest.MonkeyPatch) -> None:
         raise KeyboardInterrupt
 
     monkeypatch.setattr(cli, "serve", serve)
-    cli.main(["run", "--core", "http://h:7860", "--room", "salon", "-v"])
+    cli.main(["run", "--core", "http://h:8471", "--room", "salon", "-v"])
 
 
 def test_twin_starts_the_simulated_daemon(monkeypatch: pytest.MonkeyPatch) -> None:
