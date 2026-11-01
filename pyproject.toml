@@ -37,7 +37,7 @@ audio = ["nestor-satellite[sounddevice]"]
 nestor-reachy = "nestor_reachy.cli:main"
 
 [project.urls]
-Homepage = "https://nestor.mathislambert.fr"
+Homepage = "https://nestorhome.dev"
 Source = "https://github.com/nestor-home/nestor-reachy"
 Issues = "https://github.com/nestor-home/nestor-reachy/issues"
 
