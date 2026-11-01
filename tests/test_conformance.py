@@ -1,6 +1,7 @@
 """The Reachy driver against the Nestor server's black-box conformance suite, robot mocked."""
 
 from nestor.adapters.channels.voice.satellites.conformance import Launch, check_satellite
+from nestor.adapters.i18n import FluentLocalizer, catalogue_dirs
 from nestor_satellite import (
     AUDIO_CAPTURE,
     EXPRESSION,
@@ -15,6 +16,8 @@ from nestor_reachy import REST, ReachySatellite
 from nestor_reachy.pose import REST_ANTENNAS
 
 from .doubles import RecordingRobot
+
+ENGLISH = FluentLocalizer(catalogue_dirs(["nestor"]))  # the suite's checks, as its report names them
 
 
 class Driver:
@@ -38,7 +41,7 @@ async def test_the_reachy_driver_conforms_and_its_head_follows_the_intents() -> 
     findings = await check_satellite(driver, deadline_s=10)
 
     assert findings.passed, findings.failures()
-    checks = {f.check for f in findings.items}
+    checks = {ENGLISH.format(f.check, "en") for f in findings.items}
     assert {
         "acknowledges intent.expression within 1 s",
         "acknowledges intent.beat within 1 s",

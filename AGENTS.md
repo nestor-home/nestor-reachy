@@ -24,7 +24,7 @@ src/nestor_reachy/
 ├── pose.py       pure body language: pose(behavior, t, expression, beat) → Pose, identify wiggle, motion limits
 ├── animator.py   the satellite's Body: latest intents, identify, 30 Hz loop, watchdog → rest
 ├── robot.py      Robot port, SafeRobot (clamps every target), the Reachy Mini adapter, connect_twin
-├── driver.py     ReachySatellite: manifest (nestor.satellite/2) + SDK Satellite + animator
+├── driver.py     ReachySatellite: manifest (nestor.satellite/1) + SDK Satellite + animator
 └── cli.py        nestor-reachy run (--pairing-uri / --pairing-code) | twin
 tests/            pose and safety units, conformance with the robot mocked, live/ against the twin
 ```
