@@ -6,7 +6,7 @@ This file is for coding agents: read it before changing anything.
 ## Commands
 
 ```bash
-uv sync                      # dev group; needs ../nestor and ../nestor-satellite-python
+uv sync                      # dev group; the SDK and the server come from PyPI
 uv run pre-commit install
 uv run ruff check && uv run ruff format --check && uv run ty check && uv run pytest
 uv run --no-dev --group live --extra reachy pytest -m live   # against the running MuJoCo twin

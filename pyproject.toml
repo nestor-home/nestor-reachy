@@ -50,7 +50,7 @@ dev = [
     "ty==0.0.94",
     "pre-commit==4.7.0",
     # The server's black-box conformance suite. Tests only: the driver never imports it.
-    "nestor-home[voice]",
+    "nestor-home[voice]==0.0.2",
 ]
 # Against the MuJoCo twin: `uv run --no-dev --group live --extra reachy pytest -m live`.
 live = [
@@ -82,10 +82,6 @@ requires-dist = ["pycairo>=1.16"]
 name = "pycairo"
 version = "1.29.2"
 requires-dist = []
-
-[tool.uv.sources]
-nestor-satellite = { path = "../nestor-satellite-python", editable = true }
-nestor-home = { path = "../nestor", editable = true }
 
 [tool.uv.build-backend]
 module-name = "nestor_reachy"

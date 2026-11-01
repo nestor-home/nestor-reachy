@@ -37,8 +37,9 @@ rest when the link to the core drops or nothing is heard from it for two seconds
 
 ## Development
 
-The tests use the Nestor server's conformance suite and the SDK from sibling checkouts
-(`../nestor`, `../nestor-satellite-python`).
+The tests use the Nestor server's conformance suite (`nestor-home`, a pinned dev dependency) and
+the SDK, both from PyPI. To test against local checkouts instead:
+`uv run --with-editable ../nestor-satellite-python --with-editable ../nestor pytest`.
 
 ```bash
 uv sync
