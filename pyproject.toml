@@ -4,7 +4,7 @@ build-backend = "uv_build"
 
 [project]
 name = "nestor-reachy"
-version = "0.2.0"
+version = "0.3.0"
 description = "Reachy Mini as a Nestor satellite: the assistant's voice, attitude and expressions on a robot head."
 readme = "README.md"
 license = "MIT"
