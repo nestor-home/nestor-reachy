@@ -1,12 +1,15 @@
 """The Reachy driver against the Nestor server's black-box conformance suite, robot mocked."""
 
-from nestor.adapters.channels.voice.satellites.conformance import Launch, check_satellite
+from nestor.adapters.channels.satellites.conformance import Launch, check_satellite
 from nestor.adapters.i18n import FluentLocalizer, catalogue_dirs
 from nestor_satellite import (
     AUDIO_CAPTURE,
+    AUDIO_PLAYBACK,
     EXPRESSION,
     HEAD_MOTION,
     IDENTIFY,
+    TEXT_DISPLAY,
+    TEXT_INPUT,
     PairingMethod,
     RecordingSink,
     SilenceSource,
@@ -62,5 +65,6 @@ async def test_without_a_robot_it_is_still_a_conforming_voice_satellite() -> Non
     assert findings.passed, findings.failures()
     assert driver.reachy is not None
     manifest = driver.reachy.satellite.manifest
-    assert AUDIO_CAPTURE in manifest.names and not {EXPRESSION, HEAD_MOTION, IDENTIFY} & manifest.names
+    assert {AUDIO_CAPTURE, AUDIO_PLAYBACK} <= manifest.names, "its microphone and speaker declare the audio"
+    assert not {EXPRESSION, HEAD_MOTION, IDENTIFY, TEXT_DISPLAY, TEXT_INPUT} & manifest.names, "no body, no screen"
     assert manifest.pairing_methods == (PairingMethod.SPEECH, PairingMethod.PROVISIONING), "it says its code"
