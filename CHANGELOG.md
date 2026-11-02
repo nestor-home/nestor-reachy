@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.0](https://github.com/nestor-home/nestor-reachy/compare/v0.3.0...v0.4.0) (2026-11-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* talk to the core through nestor-satellite 0.4 ([#15](https://github.com/nestor-home/nestor-reachy/issues/15))
+
+### Features
+
+* talk to the core through nestor-satellite 0.4 ([#15](https://github.com/nestor-home/nestor-reachy/issues/15)) ([8fa7d85](https://github.com/nestor-home/nestor-reachy/commit/8fa7d85396bab189829ed1e6b2e35dadaf6576dd))
+
 ## [0.3.0](https://github.com/nestor-home/nestor-reachy/compare/v0.2.0...v0.3.0) (2026-11-01)
 
 
