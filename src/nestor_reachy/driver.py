@@ -1,6 +1,7 @@
 """Reachy Mini as a satellite: the SDK's connection, with the animator as its body.
 
-Without a robot (no twin running), it is still a voice satellite: it then declares only audio.
+Without a robot (no twin running), it is still a voice satellite: it then declares no motion. Its audio
+capabilities follow from the microphone and the speaker it is given; it has no screen, so no text.
 
 Reachy has a speaker and no screen: it is paired with an enrollment code (a pairing URI given in its
 configuration, `NESTOR_PAIRING_URI` by default), or by typing in Nestor the device code it says on its
@@ -12,8 +13,6 @@ from collections.abc import Mapping
 from pathlib import Path
 
 from nestor_satellite import (
-    AUDIO_CAPTURE,
-    AUDIO_PLAYBACK,
     EXPRESSION,
     HEAD_MOTION,
     IDENTIFY,
@@ -35,7 +34,7 @@ BRAND = "pollen-robotics"
 def manifest(room: str, *, device_id: str | None = None, body: bool = True) -> Manifest:
     device = Device(device_id or f"reachy-{room}", MODEL, room, BRAND)
     motion = (EXPRESSION, HEAD_MOTION, IDENTIFY) if body else ()
-    return Manifest.of(device, AUDIO_CAPTURE, AUDIO_PLAYBACK, *motion)
+    return Manifest.of(device, *motion)
 
 
 class ReachySatellite:
