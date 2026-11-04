@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/nestor-home/nestor-reachy/compare/v0.4.0...v0.5.0) (2026-11-04)
+
+
+### Features
+
+* name its own software and update from Nestor ([#24](https://github.com/nestor-home/nestor-reachy/issues/24)) ([b544cab](https://github.com/nestor-home/nestor-reachy/commit/b544caba89c3aaf2b51a3dff45948d64acad38aa))
+
 ## [0.4.0](https://github.com/nestor-home/nestor-reachy/compare/v0.3.0...v0.4.0) (2026-11-02)
 
 
