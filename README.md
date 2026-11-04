@@ -32,6 +32,10 @@ recorded voice (`device_code.speech`, offline), and logs it: type it in the admi
 can ask one to identify itself: it wiggles its antennas for two seconds, while it waits to be paired
 or once connected.
 
+With `--managed`, a person can update the robot from the admin. It installs the newer `nestor-reachy`
+from PyPI into the environment it runs from, then starts again with the same command. Run it under a
+service manager all the same.
+
 Safety lives on the device: every target is clamped to the motion limits, and the robot returns to
 rest when the link to the core drops or nothing is heard from it for two seconds.
 

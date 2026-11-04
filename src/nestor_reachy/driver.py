@@ -6,9 +6,11 @@ capabilities follow from the microphone and the speaker it is given; it has no s
 Reachy has a speaker and no screen: it is paired with an enrollment code (a pairing URI given in its
 configuration, `NESTOR_PAIRING_URI` by default), or by typing in Nestor the device code it says on its
 speaker with the SDK's recorded voice (`device_code.speech`) and logs. With a body, it wiggles its
-antennas when asked to identify itself.
+antennas when asked to identify itself. Its manifest names this package (`software`): given an updater,
+a person updates it from Nestor.
 """
 
+import dataclasses
 from collections.abc import Mapping
 from pathlib import Path
 
@@ -21,7 +23,9 @@ from nestor_satellite import (
     Device,
     Manifest,
     Satellite,
+    Software,
     TokenStore,
+    Updater,
 )
 
 from nestor_reachy.animator import Animator
@@ -29,12 +33,13 @@ from nestor_reachy.robot import Robot
 
 MODEL = "reachy-mini"
 BRAND = "pollen-robotics"
+DISTRIBUTION = "nestor-reachy"
 
 
 def manifest(room: str, *, device_id: str | None = None, body: bool = True) -> Manifest:
     device = Device(device_id or f"reachy-{room}", MODEL, room, BRAND)
     motion = (EXPRESSION, HEAD_MOTION, IDENTIFY) if body else ()
-    return Manifest.of(device, *motion)
+    return dataclasses.replace(Manifest.of(device, *motion), software=Software.of(DISTRIBUTION))
 
 
 class ReachySatellite:
@@ -53,6 +58,7 @@ class ReachySatellite:
         device_id: str | None = None,
         enrollment: str | None = None,
         locale: str | None = None,
+        updater: Updater | None = None,
         environ: Mapping[str, str] | None = None,
         poll_s: float = 1.0,
     ) -> None:
@@ -68,6 +74,7 @@ class ReachySatellite:
             sink=sink,
             enrollment=enrollment,
             locale=locale,
+            updater=updater,
             environ=environ,
             poll_s=poll_s,
         )

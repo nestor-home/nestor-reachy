@@ -4,7 +4,7 @@ from types import SimpleNamespace
 from typing import Any
 
 import pytest
-from nestor_satellite import PAIRING_CODE, PAIRING_URI, PairingFailed
+from nestor_satellite import PAIRING_CODE, PAIRING_URI, UPDATE, PairingFailed
 
 from nestor_reachy import ReachySatellite, cli
 
@@ -36,6 +36,28 @@ async def test_run_connects_the_twin_and_runs_the_satellite_in_its_room(monkeypa
     device = satellite.satellite.manifest.device
     assert (device.id, device.room, device.model) == ("reachy-bureau", "bureau", "reachy-mini")
     assert satellite.satellite.tokens.path.name == "reachy-bureau.json"
+    assert satellite.satellite.manifest.software.name == "nestor-reachy", "it names its own package"
+    assert UPDATE not in satellite.satellite.manifest.names, "updated from Nestor only when managed"
+
+
+@pytest.mark.parametrize("managed", [False, True])
+async def test_a_managed_robot_can_be_updated_from_nestor(monkeypatch: pytest.MonkeyPatch, managed: bool) -> None:
+    ran: list[ReachySatellite] = []
+
+    async def twin(url: str) -> RecordingRobot:
+        return RecordingRobot()
+
+    async def run(self: ReachySatellite) -> None:
+        ran.append(self)
+
+    monkeypatch.setitem(sys.modules, "sounddevice", SimpleNamespace())
+    monkeypatch.setattr(cli, "connect_twin", twin)
+    monkeypatch.setattr(ReachySatellite, "run", run)
+    flags = ["--managed"] if managed else []
+    await cli.serve(cli.parse(["run", "--core", "http://nestor.local:8471", "--room", "bureau", *flags]))
+
+    [satellite] = ran
+    assert (UPDATE in satellite.satellite.manifest.names) is managed
 
 
 async def test_a_pairing_uri_is_all_a_headless_robot_needs(monkeypatch: pytest.MonkeyPatch) -> None:

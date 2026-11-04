@@ -6,7 +6,9 @@
 
 Reachy has no screen: give it the pairing URI of an enrollment code made in Nestor (flag, or
 `NESTOR_PAIRING_URI`), or type in Nestor the code it says on its speaker (and logs). On the twin,
-the voice goes through this machine's microphone and speaker (`audio` extra).
+the voice goes through this machine's microphone and speaker (`audio` extra). With `--managed`, a
+person can update it from Nestor: it installs the newer version from PyPI into the environment it
+runs from, then starts again with the same command (run it under a service manager all the same).
 """
 
 import argparse
@@ -20,7 +22,7 @@ from collections.abc import Sequence
 
 from nestor_satellite import InvalidEnrollment, PairingFailed
 
-from nestor_reachy.driver import ReachySatellite
+from nestor_reachy.driver import DISTRIBUTION, ReachySatellite
 from nestor_reachy.robot import DAEMON, connect_twin
 
 
@@ -39,6 +41,9 @@ def parse(argv: Sequence[str] | None = None) -> argparse.Namespace:
     run.add_argument("--id", help="this robot's id (default: reachy-<room>)")
     run.add_argument("--daemon", default=DAEMON, help="the Reachy Mini daemon (simulated only, for now)")
     run.add_argument("--token-file", help="where the token is kept (default: ~/.config/nestor-reachy/<id>.json)")
+    run.add_argument(
+        "--managed", action="store_true", help="a person can update it from Nestor (from PyPI, into this environment)"
+    )
     run.add_argument("-v", "--verbose", action="store_true")
     twin = commands.add_parser("twin", help="start the simulated Reachy Mini (MuJoCo daemon)")
     twin.add_argument("--headless", action="store_true", help="no window")
@@ -47,6 +52,7 @@ def parse(argv: Sequence[str] | None = None) -> argparse.Namespace:
 
 async def serve(args: argparse.Namespace) -> None:
     from nestor_satellite.devices import Microphone, Speaker
+    from nestor_satellite.pypi import PypiUpdater
 
     robot = await connect_twin(args.daemon)
     device_id = args.id or f"reachy-{args.room}"
@@ -60,6 +66,7 @@ async def serve(args: argparse.Namespace) -> None:
         device_id=device_id,
         enrollment=args.pairing_uri or args.pairing_code,
         locale=args.lang,
+        updater=PypiUpdater(f"{DISTRIBUTION}[audio]", module="nestor_reachy") if args.managed else None,
     )
     await satellite.run()
 
