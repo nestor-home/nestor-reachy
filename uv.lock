@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.12"
 resolution-markers = [
     "python_full_version >= '3.14' and extra != 'extra-13-nestor-reachy-reachy' and extra == 'group-13-nestor-reachy-dev'",
@@ -277,7 +277,7 @@ version = "4.15.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "idna" },
-    { name = "typing-extensions", marker = "python_full_version < '3.15' or (extra == 'extra-13-nestor-reachy-reachy' and extra == 'group-13-nestor-reachy-dev')" },
+    { name = "typing-extensions", marker = "python_full_version < '3.15'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/a9/d2/f4d173e22df740bc37b1db102b386ba719b66e95b0f0d751f556b387e6d2/anyio-4.15.1.tar.gz", hash = "sha256:9f28306018cbd6d329e64a36d58256edff76dd996fe423bc957326e578b82a94", size = 276966, upload-time = "2026-09-05T10:42:39.44Z" }
 wheels = [
@@ -409,7 +409,7 @@ name = "cffi"
 version = "2.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pycparser", marker = "implementation_name != 'PyPy' or (extra == 'extra-13-nestor-reachy-reachy' and extra == 'group-13-nestor-reachy-dev')" },
+    { name = "pycparser", marker = "implementation_name != 'PyPy'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/9e/ef/008a1939e372c06329a3fce4279c02f328488f3526744906eeec3da7ad5f/cffi-2.1.1.tar.gz", hash = "sha256:dd31f52ea1086513bb9df30f8fcee9b8918323ae067a3d5b78bc826a000712be", size = 530807, upload-time = "2026-08-03T21:21:18.939Z" }
 wheels = [
@@ -772,7 +772,7 @@ name = "cryptography"
 version = "50.0.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "cffi", marker = "platform_python_implementation != 'PyPy' or (extra == 'extra-13-nestor-reachy-reachy' and extra == 'group-13-nestor-reachy-dev')" },
+    { name = "cffi", marker = "platform_python_implementation != 'PyPy'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/9d/af/182eb91b0df3fe75c4d9f26fe70684569566745f6ba7e5c9c73a862c5252/cryptography-50.0.2.tar.gz", hash = "sha256:7b46165bb56eb4704e2eaaf86f3c940d19154535d9b0ca7d6d590b04060e00d5", size = 880623, upload-time = "2026-09-30T15:30:04.884Z" }
 wheels = [
@@ -2105,7 +2105,7 @@ wheels = [
 
 [[package]]
 name = "nestor-home"
-version = "0.8.0"
+version = "0.8.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aioimaplib" },
@@ -2123,9 +2123,9 @@ dependencies = [
     { name = "uvicorn" },
     { name = "websockets", version = "17.3", source = { registry = "https://pypi.org/simple" } },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/40/21/afe2b9991b5838ae1c3856072b667fb6d4617345c184df3ffacac30fe0e0/nestor_home-0.8.0.tar.gz", hash = "sha256:62d181cabfcfb521e62c782ff1ff4d417bf207b0851b170bf9fc9e2dcf653ebd", size = 1392270, upload-time = "2026-11-04T14:31:30Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1d/bc/804e22466d7707176a97fedc1f9415423b71326beb93d59add2986a263ce/nestor_home-0.8.1.tar.gz", hash = "sha256:d1d17a18f652e5fea5de355c29c8623e2c7912330dfff8dae311d905bd1133c1", size = 1392193, upload-time = "2026-11-04T16:01:51.665Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/42/e6/0ab216a9282e580d5de63099070aacc52aa5a16e555cdfd1eda424e9a147/nestor_home-0.8.0-py3-none-any.whl", hash = "sha256:378fc39266a579679bc30ac57f6c9fd650225c9c283f212697c659cbed44d758", size = 1589129, upload-time = "2026-11-04T14:31:28.407Z" },
+    { url = "https://files.pythonhosted.org/packages/68/45/52d1533fd9e40a28fe9a47e4a37001b6ff12eb3601c0b84776fd1d6c13bb/nestor_home-0.8.1-py3-none-any.whl", hash = "sha256:00b1f59a39341bea8df39fd34160dd33de8fef5066bc15f940c2c99e677d2978", size = 1589128, upload-time = "2026-11-04T16:01:50.194Z" },
 ]
 
 [package.optional-dependencies]
@@ -2177,7 +2177,7 @@ provides-extras = ["reachy", "audio"]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "nestor-home", extras = ["voice"], specifier = "==0.8.0" },
+    { name = "nestor-home", extras = ["voice"], specifier = "==0.8.1" },
     { name = "pre-commit", specifier = "==4.7.0" },
     { name = "pytest", specifier = "==9.2.0" },
     { name = "pytest-asyncio", specifier = "==1.4.1.post1" },
@@ -2200,7 +2200,7 @@ dependencies = [
     { name = "httpx" },
     { name = "packaging" },
     { name = "websockets", version = "15.0.1", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'extra-13-nestor-reachy-reachy'" },
-    { name = "websockets", version = "17.3", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'group-13-nestor-reachy-dev' or extra != 'extra-13-nestor-reachy-reachy'" },
+    { name = "websockets", version = "17.3", source = { registry = "https://pypi.org/simple" }, marker = "extra != 'extra-13-nestor-reachy-reachy' or extra == 'group-13-nestor-reachy-dev'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/7a/dc/48da22866adebebf820f6e844485baff21d7332abb242f741e8ff5d2b089/nestor_satellite-0.5.0.tar.gz", hash = "sha256:cdb6b7065ea71691e7e1ca30a284ea4fc324dca1ca907fe68c3ed6c09aacf3d3", size = 460212, upload-time = "2026-11-04T14:51:20.288Z" }
 wheels = [
@@ -3051,7 +3051,7 @@ version = "26.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cryptography" },
-    { name = "typing-extensions", marker = "python_full_version < '3.13' or (extra == 'extra-13-nestor-reachy-reachy' and extra == 'group-13-nestor-reachy-dev')" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/3f/e8/7325d258199b159eb2c03fe32107533e2832e70e63f4fb88a6aa00023201/pyopenssl-26.4.0.tar.gz", hash = "sha256:28dfcce0162b9211413e26dfbfdf1d24317fbeba18fc93c12400a1856b2a0bc7", size = 182046, upload-time = "2026-08-01T19:50:50.512Z" }
 wheels = [
@@ -3072,7 +3072,7 @@ name = "pytest"
 version = "9.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-13-nestor-reachy-reachy' and extra == 'group-13-nestor-reachy-dev')" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
     { name = "iniconfig" },
     { name = "packaging" },
     { name = "pluggy" },
@@ -3089,7 +3089,7 @@ version = "1.4.1.post1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pytest" },
-    { name = "typing-extensions", marker = "python_full_version < '3.13' or (extra == 'extra-13-nestor-reachy-reachy' and extra == 'group-13-nestor-reachy-dev')" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/73/7f/c60a4338420b33453d4f814ac0c930abd399f162b9bdd21af4b9e363037f/pytest_asyncio-1.4.1.post1.tar.gz", hash = "sha256:f582d9ea4a1c082195abe8bd29a1fe106aeb1cd435e3dad2d3bc2749935c36a2", size = 145360, upload-time = "2026-11-01T18:26:03.732Z" }
 wheels = [
