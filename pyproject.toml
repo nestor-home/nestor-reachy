@@ -43,7 +43,7 @@ Issues = "https://github.com/nestor-home/nestor-reachy/issues"
 
 [dependency-groups]
 dev = [
-    "pytest==9.1.1",
+    "pytest==9.2.0",
     "pytest-asyncio==1.4.1.post1",
     "pytest-cov==7.1.0",
     "ruff==0.17.3",
@@ -54,7 +54,7 @@ dev = [
 ]
 # Against the MuJoCo twin: `uv run --no-dev --group live --extra reachy pytest -m live`.
 live = [
-    "pytest==9.1.1",
+    "pytest==9.2.0",
     "pytest-asyncio==1.4.1.post1",
     "pytest-cov==7.1.0",
 ]
