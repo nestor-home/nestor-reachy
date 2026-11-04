@@ -13,7 +13,7 @@ authors = [{ name = "Mathis Lambert" }]
 requires-python = ">=3.12"
 dependencies = [
     "httpx>=0.28.1",
-    "nestor-satellite[voice]>=0.4,<0.5",
+    "nestor-satellite[voice]>=0.5,<0.6",
 ]
 keywords = ["nestor", "satellite", "reachy mini", "robotics"]
 classifiers = [

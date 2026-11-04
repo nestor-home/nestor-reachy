@@ -2170,7 +2170,7 @@ live = [
 requires-dist = [
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "nestor-satellite", extras = ["sounddevice"], marker = "extra == 'audio'" },
-    { name = "nestor-satellite", extras = ["voice"], specifier = ">=0.4,<0.5" },
+    { name = "nestor-satellite", extras = ["voice"], specifier = ">=0.5,<0.6" },
     { name = "reachy-mini", extras = ["mujoco"], marker = "extra == 'reachy'", specifier = "==1.13.0" },
 ]
 provides-extras = ["reachy", "audio"]
@@ -2193,17 +2193,18 @@ live = [
 
 [[package]]
 name = "nestor-satellite"
-version = "0.4.0"
+version = "0.5.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "fluent-runtime" },
     { name = "httpx" },
+    { name = "packaging" },
     { name = "websockets", version = "15.0.1", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'extra-13-nestor-reachy-reachy'" },
     { name = "websockets", version = "17.3", source = { registry = "https://pypi.org/simple" }, marker = "extra != 'extra-13-nestor-reachy-reachy' or extra == 'group-13-nestor-reachy-dev'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/40/dd/8cb9be57ea396834870609a4cd25fac8d6fd1345b3ad56bd1fac4d9071fb/nestor_satellite-0.4.0.tar.gz", hash = "sha256:944158337f67d39fec927b32d870a0a71da8132da6441d9cd8da673da8e3279c", size = 453568, upload-time = "2026-11-02T16:31:32.35Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/7a/dc/48da22866adebebf820f6e844485baff21d7332abb242f741e8ff5d2b089/nestor_satellite-0.5.0.tar.gz", hash = "sha256:cdb6b7065ea71691e7e1ca30a284ea4fc324dca1ca907fe68c3ed6c09aacf3d3", size = 460212, upload-time = "2026-11-04T14:51:20.288Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b9/78/0118b469e799a4d30af4ddf4cb29d81d7852bbb265dace21ea0b775044b7/nestor_satellite-0.4.0-py3-none-any.whl", hash = "sha256:4baa1f52ee8b71c255d026b607e2861382f3d04f7a58d83c55ba1186e4c99e98", size = 468627, upload-time = "2026-11-02T16:31:31.014Z" },
+    { url = "https://files.pythonhosted.org/packages/48/6d/db891c6901b2745db27a6a0e7f67bd3e78eb63415abf7e1682cf701a0757/nestor_satellite-0.5.0-py3-none-any.whl", hash = "sha256:a81b5555aa72a69fc2431417322cf95ad47f0d0b93d542577361e95bdd9c846f", size = 476197, upload-time = "2026-11-04T14:51:18.822Z" },
 ]
 
 [package.optional-dependencies]
