@@ -2171,7 +2171,7 @@ requires-dist = [
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "nestor-satellite", extras = ["sounddevice"], marker = "extra == 'audio'" },
     { name = "nestor-satellite", extras = ["voice"], specifier = ">=0.5,<0.6" },
-    { name = "reachy-mini", extras = ["mujoco"], marker = "extra == 'reachy'", specifier = "==1.13.0" },
+    { name = "reachy-mini", extras = ["mujoco"], marker = "extra == 'reachy'", specifier = "==1.14.0" },
 ]
 provides-extras = ["reachy", "audio"]
 
@@ -3237,7 +3237,7 @@ wheels = [
 
 [[package]]
 name = "reachy-mini"
-version = "1.13.0"
+version = "1.14.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiohttp" },
@@ -3274,9 +3274,9 @@ dependencies = [
     { name = "websockets", version = "15.0.1", source = { registry = "https://pypi.org/simple" } },
     { name = "zeroconf" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f5/59/e0e0f6f207072fe1fd66c5d73ca602d26e270f7bcff6a42eacaab2deec11/reachy_mini-1.13.0.tar.gz", hash = "sha256:5b26b53760eb739e7bbbff647b912d04a93d0864035ca090a08095a2a43fa942", size = 24201101, upload-time = "2026-10-26T11:17:26.744Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5b/6a/47fc7e63e17e12f8bd468d7d4544fb5c14e37fb6ad2dc01726f278aed1d6/reachy_mini-1.14.0.tar.gz", hash = "sha256:f0afe6e378009113651b82b99ac9a54d3cdd20666bb00ce38641aac27e51c2fc", size = 23971410, upload-time = "2026-11-05T13:08:23.943Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/1b/fd/fa4460e6d3d44539a59f309c8d6ef52570cd0b1f876a707340661351c089/reachy_mini-1.13.0-py3-none-any.whl", hash = "sha256:11776b3b1283e0f8b0c9f5c79301f4be33d0b21ce5756e1253d57d4afabdb8a3", size = 24287535, upload-time = "2026-10-26T11:17:23.661Z" },
+    { url = "https://files.pythonhosted.org/packages/2a/c3/d730d3cc35db95e189238056ca8fa18e4f208b7b8ca5eb1147cbbc9ae113/reachy_mini-1.14.0-py3-none-any.whl", hash = "sha256:7fc5fb12d209d59ee053590ac43f13ee712c9906793b00f733bef67f554f77b9", size = 24065982, upload-time = "2026-11-05T13:08:20.039Z" },
 ]
 
 [package.optional-dependencies]

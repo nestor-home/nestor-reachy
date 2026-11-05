@@ -29,7 +29,7 @@ classifiers = [
 
 [project.optional-dependencies]
 # The Reachy Mini SDK and its MuJoCo simulation (the twin). Version pinned: the driver relies on its API.
-reachy = ["reachy-mini[mujoco]==1.13.0"]
+reachy = ["reachy-mini[mujoco]==1.14.0"]
 # This machine's microphone and speaker (the twin has no audio of its own).
 audio = ["nestor-satellite[sounddevice]"]
 
