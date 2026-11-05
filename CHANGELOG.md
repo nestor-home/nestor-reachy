@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/nestor-home/nestor-reachy/compare/v0.5.0...v0.5.1) (2026-11-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency reachy-mini to v1.14.0 ([#28](https://github.com/nestor-home/nestor-reachy/issues/28)) ([a3d60c3](https://github.com/nestor-home/nestor-reachy/commit/a3d60c346f4a3c9fe704ebe06465899602a9869a))
+
 ## [0.5.0](https://github.com/nestor-home/nestor-reachy/compare/v0.4.0...v0.5.0) (2026-11-04)
 
 
