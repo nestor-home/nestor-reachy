@@ -50,7 +50,7 @@ dev = [
     "ty==0.0.99",
     "pre-commit==4.7.0",
     # The server's black-box conformance suite. Tests only: the driver never imports it.
-    "nestor-home[voice]==0.9.0",
+    "nestor-home[voice]==0.10.0",
 ]
 # Against the MuJoCo twin: `uv run --no-dev --group live --extra reachy pytest -m live`.
 live = [
