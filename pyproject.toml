@@ -47,7 +47,7 @@ dev = [
     "pytest-asyncio==1.5.0",
     "pytest-cov==7.1.0",
     "ruff==0.17.5",
-    "ty==0.0.101",
+    "ty==0.0.102",
     "pre-commit==4.7.0",
     # The server's black-box conformance suite. Tests only: the driver never imports it.
     "nestor-home[voice]==0.12.0",
