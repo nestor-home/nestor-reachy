@@ -47,7 +47,7 @@ the SDK, both from PyPI. To test against local checkouts instead:
 
 ```bash
 uv sync
-uv run pre-commit install
+uv run lefthook install      # pre-push: ruff, ty and the lock on the pushed files
 uv run ruff check && uv run ruff format --check && uv run ty check && uv run pytest
 uv run --no-dev --group live --extra reachy pytest -m live   # with `nestor-reachy twin` running
 ```
