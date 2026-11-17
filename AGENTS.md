@@ -7,7 +7,7 @@ This file is for coding agents: read it before changing anything.
 
 ```bash
 uv sync                      # dev group; the SDK and the server come from PyPI
-uv run pre-commit install
+uv run lefthook install      # pre-push: ruff, ty and the lock on the pushed files
 uv run ruff check && uv run ruff format --check && uv run ty check && uv run pytest
 uv run --no-dev --group live --extra reachy pytest -m live   # against the running MuJoCo twin
 ```
@@ -53,5 +53,7 @@ tests/            pose and safety units, conformance with the robot mocked, live
 ## Tests
 
 - Test behaviour, not implementation: one behaviour per test, named as a sentence.
+- Tests run in random order (`pytest-randomly`, seed printed at the top): a test never relies on another. Replay
+  an order with `pytest --randomly-seed=<seed>`.
 - The robot is a recording double; the Reachy SDK is a fake module; time is an injected clock.
 - Uncovered code is either tested for a real behaviour or deleted — never excluded.
