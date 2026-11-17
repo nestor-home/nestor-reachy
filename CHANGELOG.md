@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.2](https://github.com/nestor-home/nestor-reachy/compare/v0.5.1...v0.5.2) (2026-11-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency nestor-satellite to &gt;=0.6,&lt;0.7 ([#46](https://github.com/nestor-home/nestor-reachy/issues/46)) ([abea2c0](https://github.com/nestor-home/nestor-reachy/commit/abea2c0f223662a9891046d2c31b5e4aa4f72d89))
+
 ## [0.5.1](https://github.com/nestor-home/nestor-reachy/compare/v0.5.0...v0.5.1) (2026-11-05)
 
 
