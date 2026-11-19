@@ -2000,7 +2000,7 @@ wheels = [
 
 [[package]]
 name = "nestor-home"
-version = "0.16.0"
+version = "0.16.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aioimaplib" },
@@ -2019,9 +2019,9 @@ dependencies = [
     { name = "uvicorn" },
     { name = "websockets", version = "17.3", source = { registry = "https://pypi.org/simple" } },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/48/02/0435552a20ec0c159b809a6a33ed98999a55ba985446f6ff9c24c709b9fc/nestor_home-0.16.0.tar.gz", hash = "sha256:6f472a4479960ccf3861636564861e114b1c44ad5bcb53fcc6ba65fcdc4f7b61", size = 2048907, upload-time = "2026-11-18T17:38:59.476Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/16/59/fdfbf1d80aa4d96997170811f13fa4a5b4977e79e7de1a0627f7d1075dd7/nestor_home-0.16.1.tar.gz", hash = "sha256:e95f164fa1a2edbddfbc6be821bc4134519d80a33fb26695b7b75b2a4593664d", size = 2049085, upload-time = "2026-11-19T15:27:43.204Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/1d/07/a2189c6e3ea2569f7b176bcde7be0c8c398722d16fa839fe1853817cffb4/nestor_home-0.16.0-py3-none-any.whl", hash = "sha256:f39468ab995a47a2d8a7669d42fa2e7efd72fe38a90e4e2878ba3cd75d6d8b4f", size = 2400072, upload-time = "2026-11-18T17:38:57.929Z" },
+    { url = "https://files.pythonhosted.org/packages/12/41/46424d7fe28fa478d05faa54ce066bd83b6bf4f1b3a553e695899590fd20/nestor_home-0.16.1-py3-none-any.whl", hash = "sha256:736208d1d412648bfaae6a4ce348c2956cf905db9ba5b3741e18c957db2d3b3b", size = 2400162, upload-time = "2026-11-19T15:27:41.631Z" },
 ]
 
 [package.optional-dependencies]
@@ -2075,7 +2075,7 @@ provides-extras = ["reachy", "audio"]
 [package.metadata.requires-dev]
 dev = [
     { name = "lefthook", specifier = "==2.2.2" },
-    { name = "nestor-home", extras = ["voice"], specifier = "==0.16.0" },
+    { name = "nestor-home", extras = ["voice"], specifier = "==0.16.1" },
     { name = "pytest", specifier = "==9.2.0" },
     { name = "pytest-asyncio", specifier = "==1.5.0" },
     { name = "pytest-cov", specifier = "==7.1.0" },
