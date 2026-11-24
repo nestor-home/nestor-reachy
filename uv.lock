@@ -2050,7 +2050,7 @@ requires-dist = [
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "nestor-satellite", extras = ["sounddevice"], marker = "extra == 'audio'" },
     { name = "nestor-satellite", extras = ["voice"], specifier = ">=0.6,<0.7" },
-    { name = "reachy-mini", extras = ["mujoco"], marker = "extra == 'reachy'", specifier = "==1.15.0" },
+    { name = "reachy-mini", extras = ["mujoco"], marker = "extra == 'reachy'", specifier = "==1.15.1" },
 ]
 provides-extras = ["reachy", "audio"]
 
@@ -3078,7 +3078,7 @@ wheels = [
 
 [[package]]
 name = "reachy-mini"
-version = "1.15.0"
+version = "1.15.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiohttp" },
@@ -3113,9 +3113,9 @@ dependencies = [
     { name = "winnie-nfc" },
     { name = "zeroconf" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/99/57/859b79b3dd9f01026ef7284a767f4e87b91a1741503c821c98970501b649/reachy_mini-1.15.0.tar.gz", hash = "sha256:e882857e1f4047a25ab8fe2ea8019675ff6d460160a5b318218b802513995f83", size = 21426416, upload-time = "2026-11-23T10:31:50.444Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ff/ee/7d39539a52d91c69a44d2e30d7781467938b71dc264c823a4c568cb04659/reachy_mini-1.15.1.tar.gz", hash = "sha256:af740be61daf2d7e2b8d7f2e2878255c4127c5361f254742184bb535a066bb63", size = 21426588, upload-time = "2026-11-24T10:59:08.619Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/22/c3/de058122db60b57820eb7dfb89924ccdf0a864ecc26ba79d18b21a48567a/reachy_mini-1.15.0-py3-none-any.whl", hash = "sha256:b949535ba83c5567b007a92f6fb6d949afcde7d2c473dfec5ba5072eb27d6153", size = 21527518, upload-time = "2026-11-23T10:31:47.937Z" },
+    { url = "https://files.pythonhosted.org/packages/5f/f0/28e6d5ceed90a6d487fa8516d23f97a69be6be465c8ed25ad7cadb873d55/reachy_mini-1.15.1-py3-none-any.whl", hash = "sha256:b15f1a6a4d3963f1c4403792e834c495e2d9fe3c4c3b09838d5b99ce8d5e9351", size = 21527574, upload-time = "2026-11-24T10:59:05.388Z" },
 ]
 
 [package.optional-dependencies]
