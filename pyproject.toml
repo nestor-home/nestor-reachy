@@ -51,7 +51,7 @@ dev = [
     # The server's black-box conformance suite. Tests only: the driver never imports it.
     "nestor-home[voice]==0.17.0",
     "pytest-randomly==5.1.0",
-    "lefthook==2.2.2",
+    "lefthook==2.2.3",
 ]
 # Against the MuJoCo twin: `uv run --no-dev --group live --extra reachy pytest -m live`.
 live = [
